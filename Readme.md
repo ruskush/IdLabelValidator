@@ -5,7 +5,18 @@
 
 ## Установка 
 
-С помощью композера:
+Добавить git-репозиторий в файле composer.json в секцию repositories: 
+```json
+{
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/ruskush/id-label-validator.git"
+    }
+  ]
+}
+```
+Затем выполнить в командной строке:
 ```shell
 composer require "ruskush/id-label-validator"
 ```
@@ -22,21 +33,19 @@ composer require "ruskush/id-label-validator"
 
 ### Примеры использования валидатора:
  ```php
- // Значение type должно быть равным одному из значений: 'id1', 'label1', 'id2', 'label2'.
- // Если значение атрибута type будет равным 'id1' или 'id2', то оно останется неизменным.
- // Если значение атрибута type будет равным 'label1' или 'label2' - то в атрибут type присвоится 'id1' или 'id2'
-    //rules()
-    return [
-        [['type'], ruskush\validators\IdLabelValidator::class, 'targetArray' => ['id1' => 'label1', 'id2' => 'label2']]
-    ];
+// Значение type должно быть равным одному из значений: 'id1', 'label1', 'id2', 'label2'.
+// Если значение атрибута type будет равным 'id1' или 'id2', то оно останется неизменным.
+// Если значение атрибута type будет равным 'label1' или 'label2' - то в атрибут type
+// присвоится соответственно 'id1' или 'id2'
+//rules()
+[['type'], ruskush\validators\IdLabelValidator::class, 'targetArray' => ['id1' => 'label1', 'id2' => 'label2']]
+
  ```
 
 ```php
- // Если в атрибут kind передать массив ['id1', 'label2'],то валидатор поменяет его на ['id1', 'id2'].
- // Если хоть одно из значений массива в атрибуте kind не удасться найти в массиве targetArray - валидация
- // не будет пройдена.
-    //rules()
-    return [
-        [['kind'], ruskush\validators\IdLabelValidator::class, 'targetArray' => ['id1' => 'label1', 'id2' => 'label2'], 'allowArray' => true]
-    ];
+// Если в атрибут kind передать массив ['id1', 'label2'],то валидатор поменяет его на ['id1', 'id2'].
+// Если хоть одно из значений массива в атрибуте kind не удасться найти в массиве targetArray - валидация
+// не будет пройдена.
+//rules()
+[['kind'], ruskush\validators\IdLabelValidator::class, 'targetArray' => ['id1' => 'label1', 'id2' => 'label2'], 'allowArray' => true]
  ```
